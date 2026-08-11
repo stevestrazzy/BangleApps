@@ -6,7 +6,8 @@
 var W = g.getWidth();
 var H = g.getHeight();
 var data = null;        // ultimi dati meteo ricevuti
-var state = "gps";      // gps | http | ok | nogps | nohttp | err
+var lastFix = null;     // ultima posizione GPS usata
+var state = "gps";      // gps | http | ok | nogps | nohttp | nobt | err
 var lastUpdate = null;
 var gpsTimeout;
 
@@ -16,6 +17,19 @@ var DIRS = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
 
 function dirName(deg) {
   return DIRS[Math.round(deg / 45) % 8];
+}
+
+// coordinate compatte in gradi e primi: N45 28' E9 11'
+function fmtCoord(v, isLat) {
+  var dir = isLat ? (v >= 0 ? "N" : "S") : (v >= 0 ? "E" : "W");
+  v = Math.abs(v);
+  var d = Math.floor(v);
+  var m = Math.round((v - d) * 60);
+  if (m === 60) { d++; m = 0; }
+  return dir + d + " " + ("0" + m).substr(-2) + "'";
+}
+function fmtPos(f) {
+  return fmtCoord(f.lat, true) + " " + fmtCoord(f.lon, false);
 }
 
 function drawValueRow(label, value, y) {
@@ -34,8 +48,8 @@ function draw() {
   g.setColor("#000");
   // intestazione in grassetto e cornice
   g.setFont("6x8").setFontAlign(0, 0);
-  g.drawString("bangle.js wind", 88, 31);
-  g.drawString("bangle.js wind", 89, 31);
+  g.drawString("bangle.js DroneWind", 88, 31);
+  g.drawString("bangle.js DroneWind", 89, 31);
   g.drawRect(2, 36, 173, 172);
   g.drawRect(3, 37, 172, 171);
   // stato in alto: GPS a sinistra, ora aggiornamento a destra
@@ -46,6 +60,8 @@ function draw() {
     nogps: "NO GPS", nohttp: "NO GADGETBR.",
     nobt: "NO BLUETOOTH", err: "ERRORE"
   }[state];
+  // a dati ricevuti, al posto di "GPS OK" mostra la posizione in gradi e primi
+  if (state === "ok" && lastFix) status = fmtPos(lastFix);
   g.drawString(status, 12, 47);
   if (lastUpdate) {
     g.setFontAlign(1, 0);
@@ -120,6 +136,7 @@ Bangle.on("GPS", function (fix) {
   if (!fix.fix) return;
   Bangle.setGPSPower(0, "dronewind");
   if (gpsTimeout) clearTimeout(gpsTimeout);
+  lastFix = { lat: fix.lat, lon: fix.lon };
   fetchWeather(fix.lat, fix.lon);
 });
 
