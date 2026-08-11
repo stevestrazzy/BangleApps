@@ -56,13 +56,12 @@ function draw() {
   var model = "retrobin";
   g.setFont("6x8", 2);
   var bw = g.stringWidth(brand);
-  g.setFont("6x8");
+  g.setFont("6x15");
   var hx = (g.getWidth() - (bw + 6 + g.stringWidth(model))) / 2;
   g.setFont("6x8", 2).setFontAlign(-1, 0);
-  g.drawString(brand, hx, 32);
-  g.drawString(brand, hx + 1, 32);       // doppio tratto = grassetto
-  g.setFont("6x8").setFontAlign(-1, 0);
-  g.drawString(model, hx + bw + 6, 36);  // appoggiato in basso, come sul Casio
+  g.drawString(brand, hx, 32);           // senza grassetto: piu' leggero
+  g.setFont("6x15").setFontAlign(-1, 0);
+  g.drawString(model, hx + bw + 6, 33);  // 6x15: alto e stretto, stile condensed
   // cornice
   g.drawRect(2, 42, 173, 172);
   g.drawRect(3, 43, 172, 171);
