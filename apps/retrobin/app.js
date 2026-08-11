@@ -27,6 +27,20 @@ function bin(v, n) {
   return s;
 }
 
+// disegna le cifre binarie una a una con spaziatura extra;
+// l'1 a 7 segmenti ha i tratti sul bordo destro della cella:
+// spostarlo un po' a sinistra lo ricentra otticamente
+function drawBits(s, x, y) {
+  for (var i = 0; i < s.length; i++) {
+    var ch = s.charAt(i);
+    g.drawString(ch, ch === "1" ? x - 2 : x, y);
+    x += g.stringWidth(ch) + 2;
+  }
+}
+function bitsWidth(s) {
+  return g.stringWidth(s) + 2 * s.length;
+}
+
 function drawRow(value, nbits, y) {
   var startX = (g.getWidth() - nbits * SPACING) / 2 + SPACING / 2;
   // etichette in 6x8: piccolo ma nitido, il 7 segmenti a questa
@@ -73,10 +87,10 @@ function draw() {
   var ms = bin(d.getMinutes(), 6);
   var cx = g.getWidth() / 2;
   g.setFont("7x11Numeric7Seg").setFontAlign(-1, 0);
-  var gap = 14;
-  var x0 = cx - (g.stringWidth(hs) + gap + g.stringWidth(ms)) / 2;
-  g.drawString(hs, x0, 133);
-  g.drawString(ms, x0 + g.stringWidth(hs) + gap, 133);
+  var gap = 12;
+  var x0 = cx - (bitsWidth(hs) + gap + bitsWidth(ms)) / 2;
+  drawBits(hs, x0, 133);
+  drawBits(ms, x0 + bitsWidth(hs) + gap, 133);
   // riga finale: giorno a sinistra, ora al centro, data a destra
   g.setFont("7x11Numeric7Seg", 2).setFontAlign(0, 0);
   g.drawString(
