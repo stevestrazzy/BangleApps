@@ -1,0 +1,17 @@
+{
+  "id": "dronewind",
+  "name": "Drone Wind",
+  "shortName": "DroneWind",
+  "version": "0.01",
+  "description": "Wind for drone pilots: speed at ground level, at 120m altitude and gusts from Open-Meteo, with direction and temperature for your GPS position. Requires Gadgetbridge with internet access.",
+  "icon": "app.png",
+  "type": "app",
+  "tags": "tool,outdoors,weather",
+  "supports": ["BANGLEJS2"],
+  "readme": "README.md",
+  "author": "stevestrazzy",
+  "storage": [
+    { "name": "dronewind.app.js", "url": "app.js" },
+    { "name": "dronewind.img", "url": "app-icon.js", "evaluate": true }
+  ]
+}
