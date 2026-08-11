@@ -1,0 +1,18 @@
+{
+  "id": "retrobin",
+  "name": "Retro Binary Clock",
+  "shortName": "RetroBin",
+  "version": "0.01",
+  "description": "A pure binary clock styled like a classic retro LCD digital watch: hours on 5 bits, minutes on 6 bits, powers of two under each dot so you can learn to read binary, plus the time as binary digits and a small 7-segment digital time with day and date.",
+  "icon": "app.png",
+  "type": "clock",
+  "tags": "clock,binary",
+  "supports": ["BANGLEJS2"],
+  "readme": "README.md",
+  "author": "stevestrazzy",
+  "allow_emulator": true,
+  "storage": [
+    { "name": "retrobin.app.js", "url": "app.js" },
+    { "name": "retrobin.img", "url": "app-icon.js", "evaluate": true }
+  ]
+}
