@@ -23,9 +23,16 @@ current GPS position.
   [Android Integration](https://banglejs.com/apps/?id=android) app installed on the
   Bangle, and **"Allow Internet Access"** enabled in Gadgetbridge's Bangle.js settings
   (the HTTP request is made through your phone).
-- A GPS fix: instant if you enable **"Overwrite GPS"** in the Android Integration
-  app settings on the watch (the phone position is then used), otherwise the watch
-  GPS is used (first fix outdoors can take 30-60s).
+- A GPS fix: instant if you use the phone position, otherwise the watch GPS is
+  used (first fix outdoors can take 30-60s). Phone GPS needs ALL of these:
+  - On the watch: Android Integration settings -> **"Overwrite GPS"** on
+  - In Gadgetbridge, device settings (gear icon): location/GPS updates enabled
+  - In Gadgetbridge **general settings** (side menu -> Settings -> Location):
+    enable **"Use updated location if available"** ("Keep position updated").
+    Without this, Gadgetbridge silently discards every GPS packet meant for
+    the watch — this one is easy to miss!
+  - On privacy ROMs like GrapheneOS: enable a network location service
+    (Settings -> Location -> Network location) for indoor positioning.
 
 ## Controls
 
