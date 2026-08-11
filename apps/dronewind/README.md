@@ -23,8 +23,9 @@ current GPS position.
   [Android Integration](https://banglejs.com/apps/?id=android) app installed on the
   Bangle, and **"Allow Internet Access"** enabled in Gadgetbridge's Bangle.js settings
   (the HTTP request is made through your phone).
-- A GPS fix: instant if you enable phone GPS forwarding in Gadgetbridge, otherwise
-  the watch GPS is used (first fix outdoors can take 30-60s).
+- A GPS fix: instant if you enable **"Overwrite GPS"** in the Android Integration
+  app settings on the watch (the phone position is then used), otherwise the watch
+  GPS is used (first fix outdoors can take 30-60s).
 
 ## Controls
 

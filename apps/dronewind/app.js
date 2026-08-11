@@ -43,7 +43,8 @@ function draw() {
   g.setFontAlign(-1, 0);
   var status = {
     gps: "GPS...", http: "METEO...", ok: "GPS OK",
-    nogps: "NO GPS", nohttp: "NO GADGETBR.", err: "ERRORE"
+    nogps: "NO GPS", nohttp: "NO GADGETBR.",
+    nobt: "NO BLUETOOTH", err: "ERRORE"
   }[state];
   g.drawString(status, 12, 47);
   if (lastUpdate) {
@@ -98,7 +99,7 @@ function fetchWeather(lat, lon) {
     state = "ok";
     draw();
   }).catch(function (e) {
-    state = "err";
+    state = (String(e).indexOf("Bluetooth") >= 0) ? "nobt" : "err";
     draw();
   });
 }
