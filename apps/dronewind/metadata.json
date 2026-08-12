@@ -10,6 +10,7 @@
   "supports": ["BANGLEJS2"],
   "readme": "README.md",
   "author": "stevestrazzy",
+  "screenshots": [{ "url": "screenshot.png" }],
   "dependencies": { "android": "app" },
   "storage": [
     { "name": "dronewind.app.js", "url": "app.js" },
